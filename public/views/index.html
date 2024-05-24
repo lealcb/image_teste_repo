@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Imagens</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Editor de Imagens</h1>
+    </header>
+    <main>
+        <div id="imageLibrary"></div>
+        <canvas id="imageCanvas"></canvas>
+        <div id="textEditor">
+            <textarea id="textInput" placeholder="Digite seu texto aqui"></textarea>
+            <select id="fontSelect">
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <!-- Adicione outras opções de fonte conforme necessário -->
+            </select>
+            <input type="color" id="colorInput" value="#ffffff">
+            <input type="number" id="sizeInput" value="30" min="1">
+            <button id="addTextBtn">Adicionar Texto</button>
+        </div>
+
+        
+    </main>
+    <footer>
+        <button id="saveBtn">Salvar</button>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
