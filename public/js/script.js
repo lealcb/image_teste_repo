@@ -61,6 +61,39 @@ addTextBtn.addEventListener('click', function() {
     drawText();
 });
 
+// Mover texto na imagem com eventos de toque
+imageCanvas.addEventListener('touchstart', function(event) {
+    const touchX = event.touches[0].clientX - imageCanvas.getBoundingClientRect().left;
+    const touchY = event.touches[0].clientY - imageCanvas.getBoundingClientRect().top;
+
+    if (
+        touchX >= text.x &&
+        touchX <= text.x + ctx.measureText(text.content).width &&
+        touchY >= text.y - text.size &&
+        touchY <= text.y
+    ) {
+        isDragging = true;
+        offsetX = touchX - text.x;
+        offsetY = touchY - text.y;
+    }
+});
+
+imageCanvas.addEventListener('touchmove', function(event) {
+    if (isDragging) {
+        const touchX = event.touches[0].clientX - imageCanvas.getBoundingClientRect().left;
+        const touchY = event.touches[0].clientY - imageCanvas.getBoundingClientRect().top;
+
+        text.x = touchX - offsetX;
+        text.y = touchY - offsetY;
+        drawText();
+    }
+});
+
+imageCanvas.addEventListener('touchend', function() {
+    isDragging = false;
+});
+
+//
 // Desenhar texto na imagem
 function drawText() {
     ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
