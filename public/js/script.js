@@ -41,16 +41,49 @@ fetch('/getImages')
 
 
 // Função para carregar imagem selecionada
+// function loadImage(imageSrc) {
+//     const img = new Image();
+//     img.onload = function() {
+//         imageCanvas.width = img.width;
+//         imageCanvas.height = img.height;
+//         ctx.drawImage(img, 0, 0);
+//         image = img;
+//     };
+//     img.src = imageSrc;
+// }
+
+// Função para carregar imagem selecionada
 function loadImage(imageSrc) {
     const img = new Image();
     img.onload = function() {
-        imageCanvas.width = img.width;
-        imageCanvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
+        let width = img.width;
+        let height = img.height;
+
+        // Verifica se a largura ou a altura da imagem excede o máximo permitido
+        if (width > 800 || height > 600) {
+            // Calcula a proporção de redimensionamento
+            const ratioWidth = 800 / width;
+            const ratioHeight = 600 / height;
+
+            // Usa a proporção menor para garantir que a imagem caiba dentro do limite
+            const ratio = Math.min(ratioWidth, ratioHeight);
+
+            // Redimensiona a largura e a altura
+            width *= ratio;
+            height *= ratio;
+        }
+
+        // Define o tamanho do canvas de acordo com a largura e a altura redimensionadas
+        imageCanvas.width = width;
+        imageCanvas.height = height;
+
+        // Desenha a imagem no canvas
+        ctx.drawImage(img, 0, 0, width, height);
         image = img;
     };
     img.src = imageSrc;
 }
+
 
 // Adicionar texto à imagem
 addTextBtn.addEventListener('click', function() {
